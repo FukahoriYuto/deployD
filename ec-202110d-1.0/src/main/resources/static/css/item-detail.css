@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+a, a:hover {
+	text-decoration: none;
+	color: rgb(51, 51, 51);
+}
+
+#recommendation:hover {
+	box-shadow: 0 0 15px rgba(33, 33, 33, 0.2);
+}

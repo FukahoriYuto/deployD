@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.card:hover {
+	box-shadow: 0 0 15px rgba(33, 33, 33, 0.2);
+}
+
+.card {
+	overflow: hidden;
+}
+
+.item-image:hover {
+	transform: scale(1.1, 1.1);
+	transition: 0.5s all;
+}
+
+a, a:hover {
+	text-decoration: none;
+	color: rgb(51, 51, 51);
+}

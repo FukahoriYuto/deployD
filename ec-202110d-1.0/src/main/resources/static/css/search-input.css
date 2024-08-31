@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.ui-widget-content{
+	list-style: none;
+	background-color : white;
+}
+
+.ui-widget-content .ui-state-active {
+    border: 1px solid #dcdcdc;
+    background: #dcdcdc;
+}
