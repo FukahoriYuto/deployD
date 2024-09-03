@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<title>Rakuzon</title>
+</head>
+<body>
+
+	<nav th:fragment="header"
+		class="navbar navbar-expand-lg navbar-dark">
+		<div class="container-fluid p-3" style="background-color: #131921">
+			<a class="navbar-brand fs-3" href="home.html" th:href="@{/top-page}"
+				style="color: #f99904; font-family: sans-serif"><img src="/image/logo.png" alt="Rakuzon" width="220" height="40"></a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse me-4" id="navbarNavAltMarkup">
+				<!-- 左側コンテンツ -->
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<!-- ホームへのリンク（一応） --> <a href="home.html" th:href="@{/top-page}"
+						class="nav-link active" aria-current="page">Home</a>
+					</li>
+					<li class="nav-item">
+						<!-- ログイン者名表示 --> <span class="nav-link desabled">ようこそ <span
+							th:if="${session.userInfo != null}"
+							th:text="${session.userInfo.name} + 'さん'">ゲスト</span>
+					</span>
+					</li>
+				</ul>
+
+				<!-- 右側コンテンツ -->
+				<!-- 検索フォーム -->
+				<form class="d-flex" id="headerSearchForm" method="get"
+					th:action="@{/top-page/search}" th:object="${headerForm}">
+					<input class="form-control me-2" type="search"
+						id="name" aria-label="Search" placeholder="Search" th:field="*{name}" /> <input
+						type="hidden" name="sortNum" id="searchSortNum">
+					<button id="search" class="btn btn-success me-3 px-4" type="submit">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+							fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+							<path
+								d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
+					</button>
+					<!-- 検索フォーム -->
+				</form>
+				<div class="navbar-nav">
+					<!-- カートへのリンク -->
+					<div th:if="${session.userInfo != null}" class="dropdown">
+						<button class="btn btn-cart dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+								fill="currentColor" class="bi bi-person-circle"
+								viewBox="0 0 16 16">
+								<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+								
+								<path fill-rule="evenodd"
+									d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" /></svg>
+							アカウント
+						</button>
+
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<li>
+								<!-- カートリストへのリンク --> <a class="dropdown-item"
+								th:href="@{/cart(userId=${session.userInfo.id})}">カートの中身:<span
+									th:text="${session.cartItems}" class="fs-5" id="cart-size">Num</span>点
+							</a> <a th:href="@{/order-history(userId = ${session.userInfo.id})}"
+								class="dropdown-item">注文履歴</a>
+							</li>
+						</ul>
+					</div>
+
+					<!-- ログインステータスによりどちらか表示 -->
+					<a th:if="${session.userInfo == null}" class="nav-link active"
+						th:href="@{/login-page}">ログイン</a> <a
+						th:if="${session.userInfo != null}" class="nav-link"
+						th:href="@{/login-page/logout}">ログアウト</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+
+</body>
+</html>

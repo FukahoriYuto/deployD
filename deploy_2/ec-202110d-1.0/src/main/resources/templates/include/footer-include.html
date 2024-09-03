@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<title>Rakuzon</title>
+</head>
+<body>
+
+	<nav th:fragment="footer">
+		<div class="navbar-nav py-2"
+			style="background-color: #131921; display: flex; justify-content: center; align-items: center;">
+			<a style="color: #dadadb;" href="https://career-engineer.jp/">採用情報</a>
+			<a th:if="${session.userInfo != null}" style="color: #dadadb;"
+				th:href="@{/order-history(userId = ${session.userInfo.id})}">注文履歴</a> <a
+				th:if="${session.userInfo != null}" style="color: #dadadb;"
+				th:href="@{/cart(userId=${session.userInfo.id})}">カートの中身を見る</a>
+		</div>
+
+		<div class="navbar-nav pb-2"
+			style="background-color: #131921; display: flex; justify-content: center; align-items: center; height: 60px;">
+			<a href="home.html" th:href="@{/top-page}"
+				style="color: #f99904; font-family: sans-serif;"><img
+				src="/image/logo.png" alt="Rakuzon" width="220" height="40"></a>
+		</div>
+	</nav>
+
+</body>
+</html>
